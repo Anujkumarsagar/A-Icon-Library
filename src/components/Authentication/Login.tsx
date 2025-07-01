@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useState } from "react"
-import { EyeSlashDuotoneDark, EyeDuotoneDark, Lock1BoldDark, UserBoldDark, ArrowRight1BoldDark, Lock1BoldLight, EyeSlashDuotoneLight, EyeDuotoneLight } from "../../../public/RootIcon/COCO/icons"
+import { EyeSlashDuotoneDark, EyeDuotoneDark, Lock1BoldDark, UserBoldDark, ArrowRight1BoldDark, Lock1BoldLight, EyeSlashDuotoneLight, EyeDuotoneLight, UserBoldLight } from "../../../public/RootIcon/COCO/icons"
 import { MailSendEnvelopeStreamlineFlex, MailSendEnvelopeStreamlineFlexLight } from "../../../public/RootIcon/SmoothIcons/icons"
 import GradientButton from "../Buttons/GradientButton"
 import MorphingButton from "../Buttons/MorphingButton"
@@ -57,7 +57,7 @@ export default function AnimatedLogin() {
                             {!isLogin && (
                                 <div className="relative group">
                                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <UserBoldDark className="h-5 w-5 text-stone-800/50 group-focus-within:text-purple-400 transition-colors" />
+                                        <UserBoldLight className="h-5 w-5 text-stone-800/50 group-focus-within:text-purple-400 transition-colors" />
                                     </div>
                                     <input
                                         type="text"
@@ -134,7 +134,6 @@ export default function AnimatedLogin() {
                             </button>
                         </div>
                                 
-                               <SlideTextButton UpperText={"Want SVG"} DownText={"There We Go"} />
 
                     </div>
                 {/* </div> */}

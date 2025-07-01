@@ -1,10 +1,10 @@
 "use client"
 
-import type React from "react"
+import React from "react"
 
-import { useState, useRef } from "react"
+import { useState, useRef, FC } from "react"
 import { Heart, Download, Copy, Check, Eye, Bookmark, MoreHorizontal } from "lucide-react"
-import { HeartBoldLight } from "../../../public/RootIcon/COCO/icons"
+import { TextBoldLight } from "../../../public/RootIcon/COCO/icons"
 import MorphingButton from "../Buttons/MorphingButton"
 
 interface PreviewCardProps {
@@ -12,7 +12,7 @@ interface PreviewCardProps {
     author: string
   
     previewImage?: string
-    svgContent?: string
+    svgContent?: FC
     colors: {
         primary: string
         secondary: string
@@ -23,9 +23,7 @@ interface PreviewCardProps {
 export default function IconPreviewCard({
     title = "Animated Heart Icon",
     author = "Sarah Chen",
-    svgContent = `<svg viewBox="0 0 24 24" fill="currentColor" class="w-full h-full">
-    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-  </svg>`,
+    svgContent = TextBoldLight,
     colors = { primary: "#ef4444", secondary: "#f87171", accent: "#fca5a5" },
 }: PreviewCardProps) {
     const [isLiked, setIsLiked] = useState(false)
@@ -82,9 +80,9 @@ export default function IconPreviewCard({
                         : undefined,
                 }}
             >
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 via-pink-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0  bg-gradient-to-br from-purple-500/20 via-pink-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-                <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute m-auto  inset-0 overflow-hidden">
                     {Array.from({ length: 6 }).map((_, i) => (
                         <div
                             key={i}
@@ -120,18 +118,20 @@ export default function IconPreviewCard({
                     {/* Preview Area */}
                     <div className="relative mb-6">
                         <div
-                            className="w-full h-48 rounded-2xl flex items-center justify-center relative overflow-hidden transition-all duration-500 group-hover:scale-105"
+                            className="w-full h-48 rounded-2xl flex items-center justify-center relative overflow-hidden transition-all scale-95 duration-500 group-hover:scale-105"
                             style={{
                                 background: `linear-gradient(135deg, ${colors.primary}20, ${colors.secondary}20, ${colors.accent}20)`,
                             }}
                         >
                             {/* Animated SVG */}
 
-                            {/* <div
-                                className="w-24 h-24 transition-all duration-500 group-hover:scale-125 group-hover:rotate-12"
+                            <div
+                                className="w-24 h-24 flex justify-center items-center scale-200 transition-all duration-500 group-hover:scale-225 group-hover:rotate-12"
                                 style={{ color: colors.primary }}
-                                dangerouslySetInnerHTML={{ __html: }}
-                            /> */}
+                                
+                            > 
+                            {svgContent && React.createElement(svgContent)}
+                            </div>
                             {/* Sparkle Effects */}
                             <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                                 <div className="w-2 h-2 bg-white rounded-full animate-ping"></div>
