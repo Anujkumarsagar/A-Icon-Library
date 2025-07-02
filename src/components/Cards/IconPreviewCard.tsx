@@ -6,6 +6,8 @@ import { useState, useRef, FC } from "react"
 import { Heart, Download, Copy, Check, Eye, Bookmark, MoreHorizontal } from "lucide-react"
 import { TextBoldLight } from "../../../public/RootIcon/COCO/icons"
 import MorphingButton from "../Buttons/MorphingButton"
+import { Card } from '@/components/Cards/card'
+import { tetrislyIcon } from '../../../public/RootIcon/Tetrisly Icon Library/icons'
 
 interface PreviewCardProps {
     title: string
@@ -20,7 +22,10 @@ interface PreviewCardProps {
     }
 }
 
-export default function IconPreviewCard({
+const ICONS = Object.values(tetrislyIcon);
+
+
+export function IconPreviewCard({
     title = "Animated Heart Icon",
     author = "Sarah Chen",
     svgContent = TextBoldLight,
@@ -52,7 +57,7 @@ export default function IconPreviewCard({
 
     const handleCopy = async () => {
         try {
-            await navigator.clipboard.writeText(svgContent)
+            await navigator.clipboard.writeText(svgContent.toString())
             setIsCopied(true)
             setTimeout(() => setIsCopied(false), 2000)
         } catch (err) {

@@ -1,57 +1,157 @@
+"use client"
+
 import Link from 'next/link'
-import React from 'react'
+import React, { useRef, useState, useEffect } from 'react'
+import { CloseDuotoneDark, Home2BoldDark, Menu1DuotoneDark, MenuBoldDark, MenuBoldLight, SettingTwocolorsDark, ShieldCheckDuotoneDark, ShieldCheckDuotoneLight, UserBoldDark, VolumeCrossDuotoneDark, WorkDuotoneLight } from '../../../public/RootIcon/COCO/icons'
 import LinkComponent from '../SmallChunks/LinkComponent'
+import { Menu } from '../../../public/RootIcon/Tetrisly Icon Library/icons'
+
+import Dropdown from '../SmallChunks/Dropdown'
+import SidebarDrawer from '../SmallChunks/Dropdown'
+import LogoSvg from '../SmallChunks/LogoSvg'
 
 function DesktopNavbar() {
 
-    let LinksofRemixIcons = [ "Arrows", "Buildings", "Bussiness", "Communication", "Design", "Developement", "Device", "Document", "Editor", "Finance", "Health", "Logos", "Map", "Media", "Others", "System", "Users", "Weather",]
+    let LinksofRemixIcons = ["All", "Arrows", "Buildings", "Bussiness", "Communication", "Design", "Developement", "Device", "Document", "Editor", "Finance", "Health", "Logos", "Map", "Media", "Others", "System", "Users", "Weather",]
+    let LinksofCocoIcons = ["All", "BoldDark", "BoldLight", "DuotoneDark", "DuotoneLight", "LightDark", "LightLight", "TwocolorsDark", "TwocolorsLight"]
+    const [isOpen, setIsOpen] = useState(false);
+    const [drawer, setDrawer] = useState(false)
+    const [drawer2, setDrawer2] = useState(false)
+    const [drawer3, setDrawer3] = useState(false)
+    const drawerRef = useRef<HTMLDivElement>(null)
+    const drawerRef2 = useRef<HTMLDivElement>(null)
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (drawerRef.current && !drawerRef.current.contains(event.target as Node)) {
+                handleDrawer("remix", "close");
+            }
+            else if (drawerRef2.current && !drawerRef2.current.contains(event.target as Node)) {
+                handleDrawer("coco", "close");
+            }
+        }
+        if (drawer) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [drawer, drawer2, isOpen]);
+
+    const handleDrawer = (drawerName: "remix" | "coco", action: "toggle" | "close" = "toggle") => {
+        if (drawerName === "remix") {
+            if (action === "toggle") {
+                setDrawer(prev => {
+                    if (!prev) setDrawer2(false);
+                    return !prev;
+                });
+            } else {
+                setDrawer(false);
+            }
+        }
+        if (drawerName === "coco") {
+            if (action === "toggle") {
+                setDrawer2(prev => {
+                    if (!prev) setDrawer(false);
+                    return !prev;
+                });
+            } else {
+                setDrawer2(false);
+            }
+        }
+    };
+
     return (
-        <div>
-            <aside className="w-64 min-h-screen bg-gradient-to-b from-purple-600 to-cyan-400 shadow-lg flex flex-col justify-between">
-                <div>
-                    <Link className="block text-2xl font-bold text-white tracking-wide px-6 py-6" href="#">
-                        <span className="bg-white/20 px-2 py-1 rounded-lg">Iconsets</span>
-                    </Link>
-                    <ul className="flex flex-col gap-2 mt-4 px-4">
-                        <li>
-                            <Link className="block text-white hover:text-black/80 font-semibold transition-colors px-4 py-2 rounded-lg hover:bg-white/20" href="#">
-                                Home
-                            </Link>
-                        </li>
-                        <li>
-                            <Link className="block text-white hover:text-black/80 font-semibold transition-colors px-4 py-2 rounded-lg hover:bg-white/20" href="#">
-                                Link
-                            </Link>
-                        </li>
-                        <li className="relative group ">
-                            <button className="w-full text-left text-white hover:text-black/80 font-semibold transition-colors flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-white/20">
-                                RemixIcon
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </button>
-                            <div className="absolute left-full -top-50 mt-0 ml-2 w-40 bg-white rounded-lg shadow-lg opacity-0 group-hover:opacity-100 cursor-pointer pointer-events-none group-hover:pointer-events-auto transition-opacity z-10">
-                                <LinkComponent objOfLinks={LinksofRemixIcons} />
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <form className="flex items-center gap-2 px-6 py-6">
-                    <input
-                        className="rounded-lg px-3 py-1 border border-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-                        type="text"
-                        placeholder="Search"
-                    />
-                    <button
-                        className="bg-white text-cyan-600 font-semibold px-4 py-1 rounded-lg border border-cyan-400 hover:bg-cyan-400 hover:text-white transition-all"
-                        type="submit"
-                    >
-                        Search
-                    </button>
-                </form>
-            </aside>
+        <div
+            className={`h-screen   bg-gray-800 text-white items-center justify-center p-4 transition-all duration-300 ${isOpen ? "w-64" : "w-20"
+                }`}
+        >
+            <LogoSvg />
+        
+
+            {/* Sidebar Items */}
+            <div className="">
+                <button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className=" w-full cursor-pointer flex items-center space-x-2 p-2 hover:bg-gray-700 rounded"
+                >
+                    {isOpen ? <CloseDuotoneDark className="h-5 w-5" /> : <Menu1DuotoneDark className="h-5 w-5" />}
+                    {isOpen && <span className='a' >Close</span>}
+                </button>
+
+                <Link href="/">
+                    <div className="flex items-center space-x-2 cursor-pointer hover:bg-gray-700 p-2 rounded">
+                        <Home2BoldDark className="w-5 h-5" />
+                        {isOpen && <span className='a' >Home</span>}
+                    </div>
+                </Link>
+
+                <Link href="/profile">
+                    <div className="flex items-center space-x-2 cursor-pointer hover:bg-gray-700 p-2 rounded">
+                        <UserBoldDark className="h-5 w-5" />
+                        {isOpen && <span>Profile</span>}
+                    </div>
+                </Link>
+
+                <SidebarDrawer
+                    isOpen={drawer}
+                    setIsOpen={(open) => {
+                        setDrawer(open);
+                        if (open) {
+                            setDrawer2(false);
+                            setDrawer3(false);
+                        } // close other drawer
+                    }}
+                    iconClosed={<ShieldCheckDuotoneDark className="h-5 w-5" />}
+                    iconOpen={<ShieldCheckDuotoneLight className="h-5 w-5" />}
+                    label="RemixIcons"
+                    sidebarExpanded={isOpen}
+                >
+                    <LinkComponent objOfLinks={LinksofRemixIcons} onClick={() => setDrawer(false)} />
+                </SidebarDrawer>
+                <SidebarDrawer
+                    isOpen={drawer3}
+                    setIsOpen={(open) => {
+                        setDrawer3(open);
+                        if (open) {
+                            setDrawer(false);
+                            setDrawer2(false);
+                        }
+                    }}
+                    iconClosed={<ShieldCheckDuotoneDark className="h-5 w-5" />}
+                    iconOpen={<ShieldCheckDuotoneLight className="h-5 w-5" />}
+                    label="SmoothIcons"
+                    sidebarExpanded={isOpen}
+                >
+                    <LinkComponent objOfLinks={LinksofRemixIcons} onClick={() => setDrawer(false)} />
+                </SidebarDrawer>
+                <SidebarDrawer
+                    isOpen={drawer2}
+                    setIsOpen={(open) => {
+                        setDrawer2(open);
+                        if (open) {
+                            setDrawer(false);
+                            setDrawer3(false);
+                        }
+                    }}
+                    iconClosed={<ShieldCheckDuotoneDark className="h-5 w-5" />}
+                    iconOpen={<ShieldCheckDuotoneLight className="h-5 w-5" />}
+                    label="CocoIcons"
+                    sidebarExpanded={isOpen}
+                >
+                    <LinkComponent objOfLinks={LinksofCocoIcons} onClick={() => setDrawer2(false)} />
+                </SidebarDrawer>
+
+                {/* <Link href="/settings">
+                    <div className="flex items-center space-x-2 cursor-pointer hover:bg-gray-700 p-2 rounded">
+                        <SettingTwocolorsDark className="h-5 w-5" />
+                        {isOpen && <span>Settings</span>}
+                    </div>
+                </Link> */}
+            </div>
         </div>
-    )
+    );
 }
 
 export default DesktopNavbar

@@ -266,7 +266,7 @@ import Warning from './icons/warning.svg';
 import WifiOff from './icons/wifi-off.svg';
 import Wifi from './icons/wifi.svg';
 
-export {
+export const tetrislyIcon = {
   AlarmClock,
   AlertFill,
   Alert,
@@ -534,4 +534,4 @@ export {
   Warning,
   WifiOff,
   Wifi,
-};
+} 

@@ -11,8 +11,10 @@ export default function IconsLayout({
 }>) {
 
     const [isMobile, setIsMobile] = useState(false);
+    const [hasMounted, setHasMounted] = useState(false);
 
     useEffect(() => {
+        setHasMounted(true);
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
         };
@@ -27,15 +29,18 @@ export default function IconsLayout({
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+    if (!hasMounted) return null;
+
     return (
         <html lang="en">
-            <body className={`flex ${isMobile && "flex-col" }  min-h-screen`}>
+            <body className={`flex ${isMobile ? "flex-col" : "flex-row"} relative min-h-screen`}>
                 {
                     isMobile ? <MobileNavbar /> : <DesktopNavbar />
                 }
-                <main className="flex-1 p-6">
+                <span className="flex-1 p-6">
                     {children}
-                </main>
+                </span> 
             </body>
         </html>
     );
