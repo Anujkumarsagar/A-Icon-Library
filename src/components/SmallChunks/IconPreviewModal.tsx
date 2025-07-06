@@ -11,10 +11,10 @@ const Button = (props: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
 );
 
 // Fallback IconData type
- type IconData = {
-   name: string;
-   component: React.ComponentType<any>;
- };
+type IconData = {
+  name: string;
+  component: React.ComponentType<any>;
+};
 
 interface IconPreviewModalProps {
   icon: IconData | null
@@ -37,39 +37,37 @@ export function IconPreviewModal({ icon, isOpen, onClose }: IconPreviewModalProp
     }
   }
 
-  const svgCode = `<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" strokeLinecap=\"round\" strokeLinejoin=\"round\">
-  <!-- ${icon.name} icon paths would go here -->
-</svg>`
+  const svgCode = `${icon.component}`
 
   const reactCode = `import { ${icon.name} } from 'lucide-react'
 
-<${icon.name} className=\"w-6 h-6\" />`
+<${icon.name} className="w-6 h-6" />`
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 w-full max-w-md">
+    <div className="fixed inset-0 bg-black/30 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{icon.name}</h3>
+          <h3 className="text-xl font-semibold text-gray-900">{icon.name}</h3>
           <Button
             type="button"
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+            className="text-gray-400 hover:text-gray-700"
           >
             <X className="w-5 h-5" />
           </Button>
         </div>
 
         <div className="flex justify-center mb-8">
-          <div className="p-8 bg-gray-50 dark:bg-gray-700 rounded-xl">
-            <icon.component className="w-16 h-16 text-gray-700 dark:text-gray-300" />
+          <div className="p-8 bg-gray-100 rounded-xl">
+            <icon.component className="w-16 h-16 text-gray-700" />
           </div>
         </div>
 
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">SVG Code</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">SVG Code</label>
             <div className="relative">
-              <pre className="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg text-xs overflow-x-auto">
+              <pre className="bg-gray-50 p-3 rounded-lg text-xs overflow-x-auto text-gray-800">
                 <code>{svgCode}</code>
               </pre>
               <Button
@@ -83,9 +81,9 @@ export function IconPreviewModal({ icon, isOpen, onClose }: IconPreviewModalProp
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">React Code</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">React Code</label>
             <div className="relative">
-              <pre className="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg text-xs overflow-x-auto">
+              <pre className="bg-gray-50 p-3 rounded-lg text-xs overflow-x-auto text-gray-800">
                 <code>{reactCode}</code>
               </pre>
               <Button

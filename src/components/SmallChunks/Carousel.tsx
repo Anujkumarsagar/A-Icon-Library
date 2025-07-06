@@ -74,7 +74,7 @@ export function Carousel() {
             {/* Prev Button */}
             <button
                 onClick={prev}
-                className="absolute top-1/2 -translate-y-1/2 left-0 z-10 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow transition"
+                className="absolute top-1/2 -translate-y-1/2 left-0 z-100 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow transition"
                 aria-label="Previous"
             >
                 <svg width="24" height="24" fill="none"><path d="M15 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
