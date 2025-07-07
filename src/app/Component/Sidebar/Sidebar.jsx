@@ -1,3 +1,5 @@
+ https://flowbite.com/docs/components/sidebar/
+
  "use client";
 import React, { useState } from "react";
 import { Home, User, Settings } from "lucide-react"; // or use your icon library
@@ -52,4 +54,5 @@ const Sidebar = () => {
     
 
 
-export default Sidebar
+export default Sidebar  
+
